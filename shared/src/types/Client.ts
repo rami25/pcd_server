@@ -17,8 +17,8 @@ export interface Client {
     entry_date?: Date;
     processing_date? : Date;
     box? : Item[];
-    credit? : number;
     total_amount? : number;
+    credit? : number;
 }
 
 const clientSchema = new Schema<Client>({
@@ -29,6 +29,10 @@ const clientSchema = new Schema<Client>({
     email: {
         type: String,
         required: false
+    },
+    password : {
+        type : String,
+        required : false
     },
     card_Id: {  
         type: String,
@@ -46,7 +50,7 @@ const clientSchema = new Schema<Client>({
     },
     processing_date: {
         type: Date,
-        required: true
+        required: false
     },
     box: [{  
         name: {
@@ -68,7 +72,8 @@ const clientSchema = new Schema<Client>({
     }],
     credit: {  
         type: Number,
-        required: false
+        required: false,
+        default : 500
     },
     total_amount: {
         type: Number,

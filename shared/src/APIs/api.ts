@@ -1,5 +1,5 @@
 // import { Admin } from "../types/Admin";
-import { Client } from "../types/Client";
+import { Client, Item } from "../types/Client";
 
 // for client
 export interface SignInRequest { 
@@ -8,6 +8,7 @@ export interface SignInRequest {
 }
 export interface SignInResponse {
     message? : string;
+    client : Client;
     jwt : string;
 }
 
@@ -15,7 +16,7 @@ export interface SignUpRequest {
     userName? : string;
     email? : string;
     password? : string;
-    card_Id? : number;
+    card_Id? : string;
 }
 export interface SignUpResponse {
     message? : string;
@@ -26,7 +27,7 @@ export interface GetRequest {
 }
 export interface GetResponse {
     message? : string;
-    box : Pick<Client, 'box'>;
+    box : Item[];
 }
 
 // for Admin
@@ -40,9 +41,9 @@ export interface AffectResponse {
 
 export interface RetRequest {
     customer_Id? : string;
-    box? : Pick<Client, 'box'>;
-    entry_date? : string;
-    processing_date? : string;
+    box? : Item[];
+    entry_date? : Date;
+    processing_date? : Date;
     total_amount? : number;
 }
 

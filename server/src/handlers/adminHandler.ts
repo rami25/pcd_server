@@ -18,8 +18,8 @@ import {
         RetRequest,
         RetResponse
 } from '../../../shared/src/APIs/api'
-import { ERRORS } from '../../../shared/src/errors'
-import { ExpressHandler, ExpressHandlerWithParams } from "../types"
+// import { ERRORS } from '../../../shared/src/errors'
+import { ExpressHandler } from "../types"
 import { db } from '../dao';
 // import { signJwt } from '../auth'
 // import { hashPassword } from '../env';
@@ -52,7 +52,7 @@ RetRequest,
 RetResponse
 > = async (req, res) => {
     const { customer_Id, box, entry_date, processing_date, total_amount } = req.body;
-    const client = await db.getClientByCId(customer_Id);
+    const client = await db.getClientByCId(customer_Id!);
     if(!client) {
         return res.status(404).send({error: 'not found'})
     }
@@ -61,7 +61,7 @@ RetResponse
         client.entry_date = entry_date
         client.processing_date = processing_date
         client.total_amount = total_amount
-        client.credit = client.credit! - total_amount
+        client.credit = client.credit! - total_amount!
         await db.updateCurrentClient(client)
         return res.status(200).json({ message: 'client updated successful' });
     }

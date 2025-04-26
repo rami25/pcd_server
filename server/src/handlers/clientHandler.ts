@@ -12,6 +12,7 @@ import { Client } from '../../../shared/src/types/Client'
 import { db } from '../dao';
 import { hashPassword } from '../env';
 import { signJwt } from '../auth';
+import { ObjectId } from '../../../shared/src/connection';
 
 export const signinClientHandler : ExpressHandler< 
 SignInRequest,
@@ -30,7 +31,8 @@ SignInResponse
     // res.cookie('jwt', jwt);
     res.status(200).send({
         message : existing.userName,
-        jwt,
+        client : existing,
+        jwt
     })    
 }
 
@@ -39,7 +41,7 @@ SignUpRequest,
 SignUpResponse
 > = async (req, res) => {
     const { userName , email , password, card_Id } = req.body
-    if(!userName || !email || password || !card_Id)
+    if(!userName || !email || !password || !card_Id)
         return res.sendStatus(400)
 
     if (await db.getClientByName(userName)) {
@@ -51,7 +53,7 @@ SignUpResponse
     const newClient : Client = {
         userName,
         email,
-        password : hashPassword(password),
+        password : hashPassword(password!),
         card_Id
     }    
     await db.createClient(newClient)
@@ -64,7 +66,7 @@ GetResponse
 > = async (req, res) => {
     const clientId = res.locals.clientId;
     if (clientId) {
-        const client = await db.getClientById(new Object(clientId));
+        const client = await db.getClientById(new ObjectId(clientId));
         if(!client)
             return res.status(400).send({error:'Client not found'})
         return res.status(200).send({

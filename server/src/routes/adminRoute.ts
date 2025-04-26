@@ -21,7 +21,7 @@ const router = Router()
 // router.delete('/delete-client-by-cardId', jwtParseMiddleware, asyncHandler(deleteClientHandlerByCardId)) // card Id
 
 
-router.delete('/affect-id', asyncHandler(affectClientIdHandler)) 
-router.delete('/retrieve', asyncHandler(updateClientHandler)) 
+router.post('/affect-id', asyncHandler(affectClientIdHandler)) 
+router.post('/retrieve', asyncHandler(updateClientHandler)) 
 
 module.exports = router
