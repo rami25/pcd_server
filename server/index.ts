@@ -2,5 +2,5 @@ import { createServer } from './server'
 
 (async () => {
     const server = await createServer()
-    server.listen(3000 , () => {console.log("server started")})
+    server.listen(8080 , () => {console.log("server started")})
 })();
