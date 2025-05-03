@@ -1,4 +1,3 @@
-// import { Admin } from "../types/Admin";
 import { Client, Item } from "../types/Client";
 
 // for client
@@ -27,7 +26,11 @@ export interface GetRequest {
 }
 export interface GetResponse {
     message? : string;
-    box : Item[];
+    client : Pick<Client, 'box'|
+                   'entry_date'|
+              'processing_date'|
+                       'credit'|
+                 'total_amount'>;
 }
 
 // for Admin
@@ -50,54 +53,3 @@ export interface RetRequest {
 export interface RetResponse {
     message? : string;
 }
-
-
-// export interface AdminSignUpRequest {
-//     name : string;
-//     email : string;
-//     password : string;
-// }
-// export interface AdminSignUpResponse {
-//     admin : Pick<Admin, '_id'>;
-//     jwt : string; 
-// }
-// export interface AdminSignInRequest {
-//     login : string;
-//     password : string;
-// }
-// export interface AdminSignInResponse {
-//     admin : Pick<Admin, '_id'>;
-//     jwt : string; 
-// }
-// export interface WithdrawRequestByPId {
-//     personId : string;
-//     fees : number;
-// }
-// export interface WithdrawResponseByPId {
-//     message? : string;
-// }
-// export interface WithdrawRequestByCardId {
-//     cardId : string;
-//     fees : number;
-// }
-// export interface WithdrawResponseByCardId {
-//     message? : string;
-// }
-// export interface SignOutRequestByPId {
-//     personId : string;
-// }
-// export interface SignOutResponseByPId {
-//     message? : string;
-// }
-// export interface SignOutRequestByCardId {
-//     cardId : string;
-// }
-// export interface SignOutResponseByCardId {
-//     message? : string;
-// }
-// export interface ResetPasswordRequest { 
-//     newPassword : string;
-// }
-// export interface ResetPasswordResponse {
-//     message? : string;
-// }

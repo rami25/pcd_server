@@ -5,7 +5,7 @@ const config = {
     useNewUrlParser: true
     // useUnifiedTopology:true
 }
-const  DATABASE_URL= process.env.DATABASE_URL!
+const DATABASE_URL = process.env.DATABASE_URL!
 
 export async function connectDb(): Promise<void> {
     const conn = await mongoose.connect(DATABASE_URL, config as ConnectOptions)

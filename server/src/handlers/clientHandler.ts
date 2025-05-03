@@ -42,7 +42,7 @@ SignUpResponse
 > = async (req, res) => {
     const { userName , email , password, card_Id } = req.body
     if(!userName || !email || !password || !card_Id)
-        return res.sendStatus(400)
+        return res.status(400).send({error:'all fields are required'})
 
     if (await db.getClientByName(userName)) {
       return res.status(403).send({ error: ERRORS.DUPLICATE_USERNAME });
@@ -57,10 +57,10 @@ SignUpResponse
         card_Id
     }    
     await db.createClient(newClient)
-    res.status(200).send({ message : 'Client Was Signed Successfully' });
+    res.status(200).send({ message : 'Client Was Created Successfully' });
 }
 
-export const getClientHandler : ExpressHandler< 
+export const getReceiptsHandler : ExpressHandler< 
 GetRequest,
 GetResponse
 > = async (req, res) => {
@@ -71,7 +71,7 @@ GetResponse
             return res.status(400).send({error:'Client not found'})
         return res.status(200).send({
             message : 'retrieving successfully!',
-            box : client.box
+            client : client
         });
     } else {
         return res.status(403).send({error: 'unauthorized'})

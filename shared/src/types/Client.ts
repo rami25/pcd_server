@@ -9,8 +9,8 @@ export interface Item {
 
 export interface Client {
     _id?: Types.ObjectId;
-    userName?: string;
-    email? : string;
+    userName: string;
+    email : string;
     password? :string;
     card_Id? : string;
     customer_Id?: string;
